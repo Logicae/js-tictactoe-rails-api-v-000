@@ -45,6 +45,8 @@ function checkWinner() {
   var board = getBoard();
   if (winner(board)) {
     message("Player " + player() + " Won!");
+  } else if (boardFull(board) && !winner(board)) {
+    message("Tie game")
   } else {
     return false
   }
@@ -60,18 +62,6 @@ function winner(board) {
   return result
 }
 
-// function checkWinner() { //I started building this - not sure it's on the right track yet
-//   var board = getBoard();
-//   winningCombos.forEach(function(combo) { //iterates over Combos array
-//     if ((board[combo[0]] == "X" && board[combo[1]] == "X" && board[combo[2]] == "X") || (board[combo[0]] == "O" && board[combo[1]] == "O" && board[combo[2]] == "O")) {
-//       message("Player " + player() + " Won!"); //calls message() based on current player
-//       clearBoard();
-//     } else if (boardFull(board)){
-//       message("Tie game")
-//     }
-//   })
-// }
-//
 function getBoard() {
   var board = [];
   $td = $("td");
@@ -81,15 +71,15 @@ function getBoard() {
     }
   return board;
 }
-//
-// function boardFull(board) {
-//   if (board.includes("")) {
-//     return false
-//   } else {
-//     return true
-//   }
-// }
-//
+
+function boardFull(board) {
+  if (board.includes("")) {
+    return false
+  } else {
+    return true
+  }
+}
+
 // function clearBoard() {
 //   $("td").html("");
 // }
