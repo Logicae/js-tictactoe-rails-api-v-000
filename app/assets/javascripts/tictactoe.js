@@ -27,7 +27,7 @@ function attachListeners() {
   })
 }
 
-function player() {
+var player = function() {
   return (turn % 2 === 0) ? "O" : "X"; //if no remainder then x
 }
 
@@ -42,7 +42,22 @@ var updateState = function(e) {
 }
 
 function checkWinner() {
+  var board = getBoard();
+  if (winner(board)) {
+    message("Player " + player() + " Won!");
+  } else {
+    return false
+  }
+}
 
+function winner(board) {
+  result = null;
+  winningCombos.forEach(function(combo) {
+    if ((board[combo[0]] === "X" && board[combo[1]] === "X" && board[combo[2]] === "X") || (board[combo[0]] === "O" && board[combo[1]] === "O" && board[combo[2]] === "O")) {
+      result = true;
+    }
+  });
+  return result
 }
 
 // function checkWinner() { //I started building this - not sure it's on the right track yet
@@ -57,15 +72,15 @@ function checkWinner() {
 //   })
 // }
 //
-// function getBoard() {
-//   var board = [];
-//   $td = $("td");
-//   for (var i=0; i < 9; i++) {
-//     var cell = $td[i];
-//     board.push(cell.innerHTML);
-//     }
-//   return board;
-// }
+function getBoard() {
+  var board = [];
+  $td = $("td");
+  for (var i=0; i < 9; i++) {
+    var cell = $td[i];
+    board.push(cell.innerHTML);
+    }
+  return board;
+}
 //
 // function boardFull(board) {
 //   if (board.includes("")) {
